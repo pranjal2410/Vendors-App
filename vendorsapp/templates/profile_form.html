@@ -1,0 +1,78 @@
+{% block content %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+</head>
+<body class="bg-dark text-white">
+<nav class="navbar bg-dark navbar-dark">
+  <!-- Brand -->
+
+
+  <a class="navbar-brand">Vendors App</a>
+<!--div class="d-flex justify-content-center">
+   <form class="form-inline" method="post">
+      {% csrf_token %}
+    <input class="form-control mr-sm-2" type="text" placeholder="Search Vendor" name="search">
+    <button class="btn btn-success" type="submit" formaction="{% url 'search' %}">Search</button>
+  </form>
+</div>
+  <Toggler/collapsibe Button ->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!- Navbar links ->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav form-inline">
+          {% if request.user.is_active %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+          </li>
+          {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Signup' %}">Signup</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'Login' %}">Login</a>
+        </li>
+          {% endif %}
+
+        {% if request.user.is_active %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+
+        {% endif %}
+    </ul>
+  </div-->
+</nav>
+<div class="container-fluid">
+    <div class="d-flex justify-content-center">
+<form method="post">
+    {% csrf_token %}
+    <table>
+    {% for fields in form %}
+    <tr>
+        <td><label>{{ fields.label_tag }}</label></td>
+        <td><label>{{ fields }}</label></td>
+        </tr>
+    {% endfor %}
+    </table>
+    <div class="text-danger">{{msg}}</div>
+    <div class="d-flex justify-content-center">
+    <button type="submit" class="btn btn-success" formmethod="post">Submit</button>
+</div>
+</form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

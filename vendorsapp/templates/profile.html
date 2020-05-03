@@ -1,0 +1,90 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+</head>
+<body class="bg-dark text-white">
+<nav class="navbar bg-dark navbar-dark">
+  <!-- Brand -->
+
+
+  <a class="navbar-brand" href="{% url 'home' %}">Vendors App</a>
+<div class="d-flex justify-content-center">
+   <form class="form-inline" method="post">
+      {% csrf_token %}
+    <input class="form-control mr-sm-2" type="text" placeholder="Search Vendor" name="search">
+    <button class="btn btn-success" type="submit" formaction="{% url 'search' %}">Search</button>
+  </form>
+</div>
+  <!-- Toggler/collapsibe Button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Navbar links -->
+  <div class="collapse navbar-collapse" id="collapsibleNavbar">
+    <ul class="navbar-nav form-inline">
+      <li class="nav-item">
+          {% if request.user.is_active %}
+        <a class="nav-link" href="{% url 'profile' %}">Profile</a>
+          {% else %}
+        <a class="nav-link" href="{% url 'Login' %}">Login</a>
+          {% endif %}
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li>
+        {% if request.user.is_active %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+      </li>
+
+        {% endif %}
+    </ul>
+  </div>
+</nav>
+<div class="d-flex justify-content-center">
+<div class="text-white">
+    <table>
+    <tr>
+        <td>First name</td>
+        <td> : </td>
+        <td>{{ profile.f_name }}</td>
+    </tr>
+    <tr>
+        <td>Last name</td>
+        <td> : </td>
+        <td>{{ profile.l_name }}</td>
+    </tr>
+    <tr>
+        <td>Phone no.</td>
+        <td> : </td>
+        <td>{{ profile.ph_no }}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td> : </td>
+        <td>{{ profile.email }}</td>
+    </tr>
+    <tr>
+        <td>Username</td>
+        <td> : </td>
+        <td>{{ profile.u_name }}</td>
+    </tr>
+</table>
+    <div></div>
+    <form method="post">
+        {% csrf_token %}
+        <input class="btn btn-danger" type="submit" value="Deactivate" formaction="{% url 'deactivateProfile' user.pk %}"/>
+    </form>
+    </div>
+</div>
+    </div>
+</body>
+</html>
